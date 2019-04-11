@@ -17,6 +17,105 @@ use phpspider\core\selector;
 //https://www.fsjgw.com/indent/search
 //
 
+//
+requests::set_useragent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36');
+
+
+header("Content-Type: text/html;charset=utf-8");
+$page = 1;
+while (true){
+    $uri = "http://www.88order.com/huangye/list-33-{$page}.html";
+    $list = requests::get($uri);
+
+    //     $list = requests::get_encoding($list);;
+    //     var_dump($list);exit;
+    $caption = selector::select($list, '.listddcp','css');
+
+    
+    if (empty($caption)){
+        exit();
+    }
+    $a =[];
+    foreach ($caption as $val){
+        
+       $a['name']= selector::select($val, '//ul/li[2]/h3/a');
+       $a['sc']= trim(selector::select($val, '//ul/li[2]/text()[1]'));///html/body/div[5]/div[2]/div[4]/
+       $a['contact']= trim(selector::select($val, '//ul/li[2]/text()[2]'));///html/body/div[5]/div[2]/div[4]/ul/li[2]/text()[2]
+       $a['tel']= trim(selector::select($val, '//ul/li[2]/text()[3]'));///html/body/div[5]/div[2]/div[4]/ul/li[2]/text()[2]
+       $a['address']= selector::select($val, '//ul/li[2]/span');////html/body/div[5]/div[2]/div[4]/ul/li[2]/span
+       echo join("\t", $a)."\n";
+    }
+    
+    
+    
+    $page++;
+    sleep(5);
+}
+exit;
+
+
+
+
+
+
+$c = 'PHPSESSID=ll2pao5hoj37p5usu89fm8qtv1';
+requests::set_cookies($c, 'oppqwe.cn');
+requests::set_useragent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36');
+requests::set_referer('http://oppqwe.cn/index/index/refundmoneyn.shtml');
+requests::set_header('Accept', 'text/plain, */*; q=0.01');
+requests::set_header('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+requests::set_header('Origin', 'text/http://oppqwe.cn');
+requests::set_header('Referer', 'http://oppqwe.cn/index/index/refundmoneyn.shtml');
+requests::set_header('X-Requested-With', 'XMLHttpRequest');
+
+
+
+//  $arr = [
+// 	'bankcard_type'=>'1',
+// 	'cname'=>'1',
+// 	'idtype'=>'1',
+// 	'idetn'=>'1',
+// 	'cardnb'=>'1',
+// 	'pwd1'=>'1',
+// 	'pwd2'=>'1',
+// 	'phone'=>'1',
+// 	'month'=>'1',
+// 	];
+
+$arr = [
+	'optionsRadios'=>22,
+	];
+
+ $url_d = 'http://oppqwe.cn/index/index/refundmoney.shtml';
+ $detail0 = requests::post($url_d,$arr);
+ 
+ 
+ while (true){
+     $arr = [
+         	'bankcard_type'=>';select * from admin;',
+    	'cname'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'idtype'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'idetn'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'cardnb'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'pwd1'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'pwd2'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'phone'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+    	'month'=>'sadfsaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+     ];
+     $url_d = 'http://oppqwe.cn/index/index/refundmoneyn.shtml';
+     $detail = requests::post($url_d,$arr);
+     echo 'do.'.time()."\n";
+ }
+
+ 
+ //$url_d = 'http://oppqwe.cn/ccd097a7b57abdd91d882ff55cda3209';
+//  $detail = requests::get($url_d);
+// echo requests::$status_code;
+// echo($detail);
+exit;
+
+
+
 $c = 'JSESSIONID=1D890C5E3447259FDB70418002F92128; UM_distinctid=169be12494138d-08fc49826dbe66-7a1437-1fa400-169be12494224b; CNZZDATA1260941888=777669561-1553672061-%7C1553672061';
 requests::set_cookies($c, 'www.fsjgw.com');
 requests::set_useragent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36');
@@ -1430,6 +1529,13 @@ file_put_contents($imageTempName, $html);
 //echo $imageTempName;
 # recognizing it
 use thiagoalessio\TesseractOCR\TesseractOCR;
+
+
+
+// $cookies = "zg_did=%7B%22did%22%3A%20%221648871faad736-0e57d083e7f039-1373565-1fa400-1648871faae2ea%22%7D; UM_distinctid=1648872019c60-0091aca84c4627-1373565-1fa400-1648872019daea; _uab_collina=153129753074027596875546; acw_tc=AQAAALB4HBr3+QwAAjigfAHmroPWXDYT; PHPSESSID=g6q8f8qint0422b3ettbpmemv3; CNZZDATA1254842228=1411075086-1535006185-%7C1535006185; Hm_lvt_3456bee468c83cc63fb5147f119f1075=1535007977; _umdata=BA335E4DD2FD504FF45B5DF6EFCC05393D908631153C8E78B158589ECC61F90A3E3794AE7EF218ACCD43AD3E795C914CC572F535FB3FFDAF9455887557A02CFA; hasShow=1; Hm_lpvt_3456bee468c83cc63fb5147f119f1075=1535008091; zg_de1d1a35bfa24ce29bbf2c7eb17e6c4f=%7B%22sid%22%3A%201535007974725%2C%22updated%22%3A%201535008141354%2C%22info%22%3A%201535007974728%2C%22superProperty%22%3A%20%22%7B%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22cuid%22%3A%20%22c06dfe5fdd04b0ec44a017e414945172%22%7D";
+// requests::set_cookies($cookies, 'www.qichacha.com');
+
+
 $ocr = new TesseractOCR($imageTempName);
 echo 6;
 $ocr->psm(4);
